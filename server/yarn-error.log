@@ -1,0 +1,46 @@
+Arguments: 
+  /home/ngocanh/.nvm/versions/node/v14.19.0/bin/node /home/ngocanh/.nvm/versions/node/v14.19.0/bin/yarn add @type/node typescript
+
+PATH: 
+  /home/ngocanh/.nvm/versions/node/v14.19.0/bin:/home/ngocanh/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/Program Files/Git/cmd:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/PuTTY/:/mnt/c/Program Files/nodejs/:/mnt/c/Ruby31-x64/bin:/mnt/c/Users/Ngoc Anh/.cargo/bin:/mnt/c/Users/Ngoc Anh/AppData/Local/Programs/Python/Python310/Scripts/:/mnt/c/Users/Ngoc Anh/AppData/Local/Programs/Python/Python310/:/mnt/c/Users/Ngoc Anh/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/Ngoc Anh/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Users/Ngoc Anh/.dotnet/tools:/mnt/c/Users/Ngoc Anh/AppData/Roaming/nvm:/mnt/c/Program Files/nodejs:/mnt/c/Users/Ngoc Anh/AppData/Roaming/npm:/snap/bin
+
+Yarn version: 
+  1.22.17
+
+Node version: 
+  14.19.0
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/@type%2fnode: Not found
+      at Request.params.callback [as _callback] (/home/ngocanh/.nvm/versions/node/v14.19.0/lib/node_modules/yarn/lib/cli.js:67029:18)
+      at Request.self.callback (/home/ngocanh/.nvm/versions/node/v14.19.0/lib/node_modules/yarn/lib/cli.js:140883:22)
+      at Request.emit (events.js:400:28)
+      at Request.<anonymous> (/home/ngocanh/.nvm/versions/node/v14.19.0/lib/node_modules/yarn/lib/cli.js:141855:10)
+      at Request.emit (events.js:400:28)
+      at IncomingMessage.<anonymous> (/home/ngocanh/.nvm/versions/node/v14.19.0/lib/node_modules/yarn/lib/cli.js:141777:12)
+      at Object.onceWrapper (events.js:519:28)
+      at IncomingMessage.emit (events.js:412:35)
+      at endReadableNT (internal/streams/readable.js:1334:12)
+      at processTicksAndRejections (internal/process/task_queues.js:82:21)
+
+npm manifest: 
+  {
+    "name": "server",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
