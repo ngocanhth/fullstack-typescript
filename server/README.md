@@ -10,6 +10,8 @@
 
 # https://www.postgresql.org/download/linux/ubuntu/
 
+# Chu y co the phai check xem port dang chay tren nginx hay ko, tat ngĩn chuyen sang start apache2
+
 # yarn add pg
 
 # yarn add express graphql apollo-server-express type-graphql class-validator reflect-metadata
