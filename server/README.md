@@ -27,6 +27,7 @@
 # Cai dat postgreSQL
 ==============
 
+# Master password: 1
 
 # postgreSQL khi tao se co 1 role mac dinh la postgres ko biet dc password
 # ta phai chuyen sang tai khoan để đổi password cho role postgres: sudo -i -u postgres
@@ -36,3 +37,16 @@
 
 
 # yarn add argon2
+
+# Thuong de giu lai login luu sesssion cookie va dung voi resis cache - bai nay dung mongodb
+
+# db: reddit/DMJ6JB6ZgFWY4xiw
+
+# yarn add express-session connect-mongo
+# yarn add -D @types/express-session
+
+# install typegoose itself
+# yarn add @typegoose/typegoose 
+
+# install peer-dependency mongoose
+# yarn add mongoose 

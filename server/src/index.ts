@@ -9,6 +9,11 @@ import { buildSchema } from 'type-graphql'
 import { HelloResolver } from './resolvers/hello'
 import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core'
 import { userResolver } from './resolvers/user'
+import mongoose from 'mongoose'
+import MongoStore from 'connect-mongo'
+import session from 'express-session'
+import { COOKIE_NAME, __prod__ } from './constants'
+ import { Context } from './types/Context'
 
 const main = async () => {
     await createConnection ({
@@ -22,16 +27,48 @@ const main = async () => {
     })
 
     const app = express()
+    
+    // Session/Cookie store
+    const mongoUrl = `mongodb+srv://${process.env.SESSION_DB_USERNAME_DEV_PROD}:${process.env.SESSION_DB_PASSWORD_DEV_PROD}@cluster0.vbs8f.mongodb.net/?retryWrites=true&w=majority`
+	// await mongoose.connect(mongoUrl, {
+	// 	useNewUrlParser: true,
+	// 	useUnifiedTopology: true
+	// })
+
+    await mongoose.createConnection(mongoUrl).asPromise();
+
+
+	console.log('MongoDB Connected')
+
+    app.use(
+		session({
+			name: COOKIE_NAME,
+			store: MongoStore.create({ mongoUrl }),
+			cookie: {
+				maxAge: 1000 * 60 * 60, // one hour
+				httpOnly: true, // JS front end cannot access the cookie
+				secure: __prod__, // cookie only works in https, production secure is true or false
+				sameSite: 'none'
+			},
+			secret: process.env.SESSION_SECRET_DEV_PROD as string,
+			saveUninitialized: false, // don't save empty sessions, right from the start, khi lon in moi save
+			resave: false
+		})
+	)
 
     const apolloServer = new ApolloServer({
-        schema: await buildSchema({ 
-            resolvers: [HelloResolver, userResolver], 
+        schema: await buildSchema({
+            resolvers: [HelloResolver, userResolver],
             validate: false
         }),
-        context: ({
-            plugin: [ApolloServerPluginLandingPageGraphQLPlayground()]
-        })
-    });
+        context: ({ req, res }): Context => ({
+            req,
+            res,
+         //   connection,
+         //   dataLoaders: buildDataLoaders()
+        }),
+        plugins: [ApolloServerPluginLandingPageGraphQLPlayground()]
+    })
 
     await apolloServer.start()
 
