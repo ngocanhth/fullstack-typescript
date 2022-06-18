@@ -6,6 +6,7 @@ import { RegisterInput } from "../types/RegisterInput";
 import { validateRegisterInput } from "../utils/validateRegisterInput";
 import { LoginInput } from "../types/LoginInput";
 import { Context } from "../types/Context";
+import { COOKIE_NAME } from "../constants";
 
 
 @Resolver()
@@ -15,6 +16,7 @@ export class userResolver {
      //Arg la 1 decorator bieens cac fiel thanh variable input trng graphql
     async register(
         @Arg('registerInput') registerInput: RegisterInput,
+        @Ctx() {req}: Context
     ): Promise<UserMutationResponse> {
 
         const validateRegisterInputErrors = validateRegisterInput(registerInput)
@@ -52,11 +54,15 @@ export class userResolver {
                 email
             })
 
+            await User.save(newUser)
+            
+            req.session.userId = newUser.id
+
             return {
                 code: 200,
                 success: true,
                 message: 'User registration successful',
-                user: await User.save(newUser)
+                user: newUser
             }
             
         } catch (error) {
@@ -119,5 +125,20 @@ export class userResolver {
 				message: `Internal server error ${error.message}`
 			}
 		}
+	}
+
+    @Mutation(_return => Boolean)
+	logout(@Ctx() { req, res }: Context): Promise<boolean> {
+		return new Promise((resolve, _reject) => {
+			res.clearCookie(COOKIE_NAME)
+
+			req.session.destroy(error => {
+				if (error) {
+					console.log('DESTROYING SESSION ERROR', error) // phai mo localhost:4000/graphql setting thay tham so credential la include thi moi thay kt qua trong console log
+					resolve(false)
+				}
+				resolve(true)
+			})
+		})
 	}
 }
