@@ -1,17 +1,19 @@
 import { CreatePostInput } from "../types/CreatePostInput";
 import { PostMutationResponse } from "../types/PostMutationResponse";
-import { Arg, Ctx, ID, Mutation, Query, Resolver } from "type-graphql";
+import { Arg, Ctx, ID, Mutation, Query, Resolver, UseMiddleware } from "type-graphql";
 import { Post } from "../entities/Post";
 import { UpdatePostInput } from "../types/UpdatePostInput";
 import { Context } from "../types/Context";
 import { AuthenticationError } from "apollo-server-core";
+import { checkAuth } from "../middleware/checkAuth";
 
 @Resolver()
 
 
 export class postResolver {
     @Mutation(_returns => PostMutationResponse)
-
+    @UseMiddleware(checkAuth)
+    
     async createPost (
         @Arg('createPostInput') {title , text}: CreatePostInput,
         @Ctx() { req }: Context
@@ -68,6 +70,8 @@ export class postResolver {
 	}
 
     @Mutation(_return => PostMutationResponse)
+    @UseMiddleware(checkAuth)
+
 	async updatePost(
         @Arg('UpdatePostInput')  UpdatePostInput: UpdatePostInput
     ): Promise<PostMutationResponse>{
@@ -115,18 +119,18 @@ export class postResolver {
     }
 
     @Mutation(_return => PostMutationResponse)
-
+    @UseMiddleware(checkAuth)
     async deletePost(
         @Arg('id', _type => ID) id: number,
-        @Ctx() { req }: Context
+       // @Ctx() { req }: Context
         ): Promise<PostMutationResponse> {
             // Thoi gian song cua cookie da het thi se ko con thay userId trong req.session dc gui tu user len server nua
-            console.log("Request Sesion", req.session)
-            if (!req.session.userId) {
-               throw new AuthenticationError(
-                   'Not Authenticated to perform GraphQL operation'
-               )
-            }
+            // console.log("Request Sesion", req.session)
+            // if (!req.session.userId) {
+            //    throw new AuthenticationError(
+            //        'Not Authenticated to perform GraphQL operation'
+            //    )
+            // }
 
         const existingPost = await Post.findOne(
             { where: {id} }
