@@ -15,6 +15,10 @@ import session from 'express-session'
 import { COOKIE_NAME, __prod__ } from './constants'
  import { Context } from './types/Context'
 import { postResolver } from './resolvers/post'
+import { newResolver } from './resolvers/new'
+import { New } from './entities/New'
+import { Blog } from './entities/Blog'
+import { blogResolver } from './resolvers/blog'
 
 const main = async () => {
     await createConnection ({
@@ -24,7 +28,7 @@ const main = async () => {
         password: process.env.DB_PASSWORD_DEV,
         logging: true,
         synchronize: true,
-        entities: [User, Post]
+        entities: [User, Post, Blog, New]
     })
 
     const app = express()
@@ -59,7 +63,7 @@ const main = async () => {
 
     const apolloServer = new ApolloServer({
         schema: await buildSchema({
-            resolvers: [HelloResolver, userResolver, postResolver],
+            resolvers: [HelloResolver, userResolver, postResolver, blogResolver, newResolver],
             validate: false
         }),
         context: ({ req, res }): Context => ({

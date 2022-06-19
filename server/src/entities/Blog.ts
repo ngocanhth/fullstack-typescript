@@ -1,23 +1,22 @@
 import { Field, ID, ObjectType } from "type-graphql";
-import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @ObjectType()
 @Entity()
 
- export class Post extends BaseEntity {
-
+ export class Blog extends BaseEntity {
         @Field(_type => ID)
         @PrimaryGeneratedColumn()
         id!: number
 
         @Field()
-        @Column()
-        title!: string
+        @Column("text")
+        blogtitle!: string
 
 
         @Field()
-        @Column()
-        text!: string
+        @Column("text")
+        blogcontent!: string
 
         @Field()
         @CreateDateColumn({ type: 'timestamptz' })
