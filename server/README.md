@@ -50,3 +50,5 @@
 
 # install peer-dependency mongoose
 # yarn add mongoose 
+
+# Shift + Alt + O: DE OPTIMIZE IMPORT
