@@ -58,7 +58,7 @@ const main = async () => {
 			secret: process.env.SESSION_SECRET_DEV_PROD as string,
 			saveUninitialized: false, // don't save empty sessions, right from the start, khi lon in moi save
 			resave: false
-		})
+		}),
 	)
 
     const apolloServer = new ApolloServer({
@@ -77,7 +77,17 @@ const main = async () => {
 
     await apolloServer.start()
 
-    apolloServer.applyMiddleware({app})
+    // apolloServer.applyMiddleware({ app, cors: true })
+
+    const corsOptions = {
+        origin: ["http://localhost:4000", "https://studio.apollographql.com"]
+      };
+
+    apolloServer.applyMiddleware({
+        app,
+        cors: corsOptions,
+        path: "/graphql",
+    });
 
     const PORT = process.env.PORT || 4000
 

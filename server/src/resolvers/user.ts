@@ -112,8 +112,10 @@ export class userResolver {
 			// Create session and return cookie
 
 			console.log("existingUser:", existingUser.id)
-			
+
 			req.session.userId = existingUser.id
+
+			console.log("test", req.session)
 
 			return {
 				code: 200,
