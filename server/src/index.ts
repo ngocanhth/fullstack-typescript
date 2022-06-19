@@ -50,10 +50,10 @@ const main = async () => {
 			name: COOKIE_NAME,
 			store: MongoStore.create({ mongoUrl }),
 			cookie: {
-				maxAge: 1000 * 60 * 60, // one hour: 1000 * 60 * 60
+				maxAge: 1000 * 60, // one hour: 1000 * 60 * 60
 				httpOnly: true, // JS front end cannot access the cookie
 				secure: __prod__, // cookie only works in https, production secure is true or false
-				sameSite: 'none'
+				sameSite: false
 			},
 			secret: process.env.SESSION_SECRET_DEV_PROD as string,
 			saveUninitialized: false, // don't save empty sessions, right from the start, khi lon in moi save
@@ -79,15 +79,19 @@ const main = async () => {
 
     // apolloServer.applyMiddleware({ app, cors: true })
 
-    const corsOptions = {
-        origin: ["http://localhost:4000", "https://studio.apollographql.com"]
-      };
+    // const corsOptions = {
+    //     origin: ["http://localhost:3000", "http://localhost:4000", "https://studio.apollographql.com"],
+    //     methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD"],
+    //     credentials: true
+    //   };
 
-    apolloServer.applyMiddleware({
-        app,
-        cors: corsOptions,
-        path: "/graphql",
-    });
+    // apolloServer.applyMiddleware({
+    //     app,
+    //     cors: corsOptions,
+    //     path: "/graphql",
+    // });
+
+    apolloServer.applyMiddleware({ app, cors: false })
 
     const PORT = process.env.PORT || 4000
 

@@ -15,7 +15,7 @@ import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, U
         title!: string
 
         @Field()
-	@Column()
+	@Column({type: "integer", nullable: true})
 	userId!: number
 
 
