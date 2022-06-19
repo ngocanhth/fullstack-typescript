@@ -52,3 +52,35 @@
 # yarn add mongoose 
 
 # Shift + Alt + O: DE OPTIMIZE IMPORT
+
+1 - khi gán req.session.userId = existingUser.id
+
+sẽ tạo 1 object kiểu {userId: 1 }
+
+2 - express session va connect-mongo tao 1 ban luu trong mongodb
+
+{"cookie":
+{"originalMaxAge":60000,"expires":"2022-06-19T11:17:33.356Z","secure":false,"httpOnly":true,"path":"/","sameSite":"none"},
+"userId":16
+}
+
+# 3. express session dong thoi luu cookie ở client browser
+# với tên và mã hóa value reddit-cookie: 3ththdhdghsfafggsdgssdgsgsdg
+
+# 4. Khi user make request tới server cookie sẽ đc gửi theo
+
+# 5. server sẽ decrypt cookie và sẽ tìm ra được session id
+# _id: "DIhWo8Sm1-1Zckol5opDUGaEPtEHlc7h"
+
+# 6. Khi đó session store make request tới mongo db
+# find(_id: "DIhWo8Sm1-1Zckol5opDUGaEPtEHlc7h")
+
+# lấy ra đc userId: 1
+
+# 7. Server gắn userId = 1 vào red.session
+
+# 8. Khi đó muốn biết user nào đang gửi request chỉ cần get
+# req.session.userId
+
+# ví dụ muốn tìm cac bài post đc tạo bởi userId
+# Post.find(userId: req.session.userId)

@@ -1,5 +1,5 @@
 import { Field, ID, ObjectType } from "type-graphql";
-import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @ObjectType()
 @Entity()
@@ -13,6 +13,10 @@ import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryColumn, PrimaryGen
         @Field()
         @Column()
         title!: string
+
+        @Field()
+	@Column()
+	userId!: number
 
 
         @Field()

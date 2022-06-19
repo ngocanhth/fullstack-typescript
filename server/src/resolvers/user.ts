@@ -110,6 +110,9 @@ export class userResolver {
 				}
 
 			// Create session and return cookie
+
+			console.log("existingUser:", existingUser.id)
+			
 			req.session.userId = existingUser.id
 
 			return {
