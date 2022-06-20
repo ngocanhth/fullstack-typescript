@@ -84,3 +84,13 @@ sẽ tạo 1 object kiểu {userId: 1 }
 
 # ví dụ muốn tìm cac bài post đc tạo bởi userId
 # Post.find(userId: req.session.userId)
+
+
+====================
+# Frontend
+=========================
+
+# https://github.com/vercel/next.js/tree/canary/examples
+# https://github.com/vercel/next.js/tree/canary/examples/with-chakra-ui
+
+# yarn create next-app --example with-chakra-ui client
