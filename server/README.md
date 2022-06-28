@@ -23,16 +23,22 @@
 
 # yarn add -D @types/express typeorm
 
-===============
+===================
 # Cai dat postgreSQL
-==============
+
+
+===================
+
 # https://phoenixnap.com/kb/how-to-install-postgresql-on-ubuntu
 # https://www.tecmint.com/install-postgresql-and-pgadmin-in-ubuntu/
 
 # ssl: https://computingforgeeks.com/enable-ssl-encryption-password-authentication-postgresql/
 # Master password: 1
 
-# loi khi cai dat: "postgres could not initiate gssapi security context"
+# error:
+ # khi cai dat: "postgres could not initiate gssapi security context" => loi nay doi password nhu ben duoi
+ # error sasl scram-server-first-message client password must be a string: loiu nay do file env khong doc duoc dien truc tiep hoac xem lai
+
 # postgreSQL khi tao se co 1 role mac dinh la postgres ko biet dc password
 # ta phai chuyen sang tai khoan để đổi password cho role postgres: sudo -i -u postgres
 # psql postgres postgres => login sang tai khoan postgres va thuc hien doi password bang cau lenh sau
