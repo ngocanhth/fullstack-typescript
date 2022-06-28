@@ -26,13 +26,17 @@
 ===============
 # Cai dat postgreSQL
 ==============
+# https://phoenixnap.com/kb/how-to-install-postgresql-on-ubuntu
+# https://www.tecmint.com/install-postgresql-and-pgadmin-in-ubuntu/
 
+# ssl: https://computingforgeeks.com/enable-ssl-encryption-password-authentication-postgresql/
 # Master password: 1
 
+# loi khi cai dat: "postgres could not initiate gssapi security context"
 # postgreSQL khi tao se co 1 role mac dinh la postgres ko biet dc password
 # ta phai chuyen sang tai khoan để đổi password cho role postgres: sudo -i -u postgres
-# psql postgres postgres
-# \password sde
+# psql postgres postgres => login sang tai khoan postgres va thuc hien doi password bang cau lenh sau
+# \password postgres  trong do postgres la ten cua role
 # nhap password sau do quay ve pgadmin 4 tao 1 database moi, link doi password: https://enterprise.arcgis.com/en/server/10.3/cloud/amazon/change-default-database-passwords-on-linux.htm
 
 
